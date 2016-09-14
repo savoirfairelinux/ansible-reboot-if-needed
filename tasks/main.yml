@@ -9,7 +9,10 @@
 - name: Prompt for rebooting
   pause:
     prompt: "About to reboot {{ item }}. Abort now if you don't want that"
-  when: "hostvars[item]['reboot_required_file'].stat.exists"
+  # We need to check for the existence of 'reboot_required_file' first because play_hosts also
+  # include hosts that have failed. When a host has failed, it stops executing and thus doesn't
+  # have 'reboot_required_file'. And if we try to access 'stat', boom! failure. We don't want that.
+  when: "'reboot_required_file' in hostvars[item] and hostvars[item]['reboot_required_file'].stat.exists"
   with_items: "{{ play_hosts }}"
 
 # ref https://support.ansible.com/hc/en-us/articles/201958037-Reboot-a-server-and-wait-for-it-to-come-back
