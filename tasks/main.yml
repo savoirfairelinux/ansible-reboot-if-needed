@@ -8,7 +8,7 @@
 # ref http://stackoverflow.com/a/35169496
 - name: Prompt for rebooting
   pause:
-    prompt: "About to reboot {{ item }}. Abort now if you don't want that"
+    prompt: "Press ENTER to reboot {{ item }} now, or Ctrl+C to abort."
   # We need to check for the existence of 'reboot_required_file' first because play_hosts also
   # include hosts that have failed. When a host has failed, it stops executing and thus doesn't
   # have 'reboot_required_file'. And if we try to access 'stat', boom! failure. We don't want that.
