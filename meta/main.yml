@@ -1,0 +1,7 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: "Savoir-faire Linux, Inc."
+  description: "Reboots hosts if needed."
+  min_ansible_version: 2.2
